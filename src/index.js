@@ -1,4 +1,5 @@
-import Chart from 'chart.js';
+import Highcharts from 'highcharts';
+import './style.css';
 
 let data = [
   {x: 5, y: 6},
@@ -14,39 +15,25 @@ let trend = function(data) {
 }
 
 let canvas = document.getElementById("graph");
-let chart = new Chart(
-  canvas,
+
+let chart = Highcharts.chart(
+  "graph",
   {
-    type: "line",
-    data: {
-      datasets: [
-        {
-          type: "scatter",
-          data: data,
-          label: "Original points",
-          showLine: false,
-          pointBackgroundColor: "#000",
-          backgroundColor: "#000"
-        },
-        {
-          label: "Trend",
-          data: trend(data),
-          fill: false,
-          borderColor: "#888",
-          borderWidth: 0.5,
-          backgroundColor: "#888"
+    chart: {
+      type: "scatter",
+      events: {
+        click: function(e){
+          console.log(e.xAxis[0].value,e.yAxis[0].value)
         }
-      ]
-    },
-    options: {
-      scales: {
-        xAxes: [
-          {
-            type: "linear",
-            position: "bottom"
-          }
-        ]
       }
-    }
+    },
+    title: {
+      text: "Trend"
+    },
+    series: [
+      {
+        data: data
+      }
+    ]
   }
 )

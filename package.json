@@ -10,7 +10,9 @@
   "author": "ne006",
   "license": "ISC",
   "devDependencies": {
-    "chart.js": "^2.7.1",
+    "css-loader": "^0.28.9",
+    "highcharts": "^6.0.4",
+    "style-loader": "^0.20.1",
     "webpack": "^3.10.0"
   }
 }

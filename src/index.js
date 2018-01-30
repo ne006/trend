@@ -11,7 +11,7 @@ let trend = function(data) {
   return data.
     filter(
       (p) => Math.min(...data.map((p)=>p.x)) == p.x || Math.max(...data.map((p)=>p.x)) == p.x
-    )
+    ).sort(function(a, b){return a.x - b.x})
 }
 
 let canvas = document.getElementById("graph");
@@ -23,7 +23,9 @@ let chart = Highcharts.chart(
       type: "scatter",
       events: {
         click: function(e){
-          console.log(e.xAxis[0].value,e.yAxis[0].value)
+          data.push({x: e.xAxis[0].value, y: e.yAxis[0].value});
+          chart.series[0].setData(data);
+          chart.series[1].setData(trend(data));
         }
       }
     },
@@ -33,7 +35,15 @@ let chart = Highcharts.chart(
     series: [
       {
         data: data
+      },
+      {
+        type: "line",
+        data: trend(data)
       }
-    ]
+    ],
+    xAxis: {
+      softMin: trend(data)[0].x - 2,
+      softMax: trend(data)[1].x + 2,
+    }
   }
 )

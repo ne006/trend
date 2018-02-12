@@ -1,4 +1,5 @@
 import Observable from './observable.js';
+import MathFunction from './math_function.js';
 
 class Dataset{
 	constructor({data: data} = {}){
@@ -18,6 +19,24 @@ class Dataset{
 		this.data = data;
 		this.emit("change", this.data);
 		this.process();
+	}
+
+	//Get extermes along x axis
+	getXExtremes(){
+		let xAxis = this.data.map((p)=>p.x);
+		return {
+			min: Math.min(...xAxis),
+			max: Math.max(...xAxis)
+		}
+	}
+
+	//Get extermes along y axis
+	getYExtremes(){
+		let yAxis = this.data.map((p)=>p.y);
+		return {
+			min: Math.min(...yAxis),
+			max: Math.max(...yAxis)
+		}
 	}
 
 	//Set hypothesis
@@ -50,20 +69,30 @@ class Dataset{
 					return response.json()
 				else
 					//mock
-					return (function(data) {
-					  return data.
-					    filter(
-					      (p) => Math.min(...data.map((p)=>p.x)) == p.x || Math.max(...data.map((p)=>p.x)) == p.x
-					    ).sort(function(a, b){return a.x - b.x})
-					})(this.data)
+					return {
+						0: 5,
+						1: 1
+					}
 					//throw response;
 			}
 		).
 		//Process response
 		then(
-			(response)=>{
-				this.setHypothesis(response);
+			MathFunction.build
+		).
+		then(
+			(mathFunc)=>{
+				let xExtremes = this.getXExtremes();
+				return MathFunction.seriesFor(
+					mathFunc,
+					xExtremes.min,
+					xExtremes.max,
+					(xExtremes.max - xExtremes.min)/100
+				)
 			}
+		).
+		then(
+			(data)=>this.setHypothesis(data)
 		).
 		//Error handling
 		catch(

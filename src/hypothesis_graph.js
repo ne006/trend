@@ -23,7 +23,10 @@ class HypothesisGraph {
 					},
 					{
 						type: "line",
-						data: []
+						data: [],
+						marker: {
+							enabled: false
+						}
 					}
 				],
 				xAxis: {

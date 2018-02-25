@@ -1,4 +1,5 @@
 import Observable from './observable.js';
+import WithMethodLag from './with_method_lag';
 import MathFunction from './math_function.js';
 
 class Dataset{
@@ -45,15 +46,20 @@ class Dataset{
 		this.emit("process", this.hypothesis)
 	}
 
-	//send data to server to determine a hypothesis
+	//queued wrapper around process_real()
 	process(){
+		this.queueMethodFor("process", this.process_real, 1000, arguments)
+	}
+
+	//send data to server to determine a hypothesis
+	process_real(){
 		if(this.data.length < 2) return;
 
 		let dataset = this;
 
 		//Submit dataset
 		fetch(
-			"hypothesis/new",
+			"http://192.168.1.2:8080/hypothesis/create",
 			{
 				method: "POST",
 				body: JSON.stringify(this.data),
@@ -65,15 +71,17 @@ class Dataset{
 		//Check response
 		then(
 			(response)=>{
-				if(response.ok)
-					return response.json()
-				else
+				if(response.ok){
+					let respJson = response.json()
+					return respJson
+				}else{
 					//mock
-					return {
+					/*return {
 						0: 5,
 						1: 1
-					}
-					//throw response;
+					}*/
+					throw response;
+				}
 			}
 		).
 		//Process response
@@ -105,5 +113,6 @@ class Dataset{
 }
 
 Object.assign(Dataset.prototype, Observable);
+Object.assign(Dataset.prototype, WithMethodLag);
 
 export default Dataset;

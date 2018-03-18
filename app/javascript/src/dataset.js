@@ -59,12 +59,13 @@ class Dataset{
 
 		//Submit dataset
 		fetch(
-			"http://192.168.1.2:8080/hypothesis/create",
+			"/hypotheses",
 			{
 				method: "POST",
-				body: JSON.stringify(this.data),
+				body: JSON.stringify({points: this.data}),
 				headers: new Headers({
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
 				})
 			}
 		).
@@ -86,7 +87,7 @@ class Dataset{
 		).
 		//Process response
 		then(
-			MathFunction.build
+			(response)=>MathFunction.build(response.hypothesis)
 		).
 		then(
 			(mathFunc)=>{

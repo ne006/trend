@@ -59,7 +59,7 @@ class Dataset{
 
 		//Submit dataset
 		fetch(
-			"/hypotheses",
+			document.location.pathname+"hypotheses",
 			{
 				method: "POST",
 				body: JSON.stringify({points: this.data}),

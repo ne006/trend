@@ -12,12 +12,12 @@
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^0.28.9",
-    "highcharts": "^6.0.4",
     "style-loader": "^0.20.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^3.0.0"
   },
   "dependencies": {
-    "@rails/webpacker": "^3.2.2"
+    "@rails/webpacker": "^3.2.2",
+		"highcharts": "^6.0.4"
   }
 }

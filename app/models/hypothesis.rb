@@ -19,14 +19,20 @@ class Hypothesis
 
 	def validate_dataset(dataset)
 		raise ArgumentError, "Dataset is not a collection" unless dataset.respond_to? :each
-		errors = []
-		dataset.each do |element|
-			errors.push "#{element} is not a Hash" &&
-				next unless element.is_a? Hash
-			errors.push "#{element} does not have :x or :y" &&
-				next unless element.has_key?(:x) && element.has_key?(:y)
-			errors.push "#{element}'s :x or :y is not a Numeric" &&
-				next unless element.fetch(:x).is_a?(Numeric) && element.fetch(:y).is_a?(Numeric)
+		errors = dataset.reduce([]) do |errors, element|
+			unless element.respond_to? :keys
+				errors.push "#{element} isn't accessed by keys"
+				next errors
+			end
+			unless element.has_key?(:x) && element.has_key?(:y)
+				errors.push "#{element} does not have :x or :y"
+				next errors
+			end
+			unless element.fetch(:x).is_a?(Numeric) && element.fetch(:y).is_a?(Numeric)
+				errors.push "#{element}'s :x or :y is not a Numeric"
+				next errors
+			end
+			errors
 		end
 		raise ArgumentError, errors.join("\n") unless errors.empty?
 	end

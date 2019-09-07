@@ -35,7 +35,7 @@ RSpec.describe Hypothesis, type: :model do
 
 		context "with invalid points in dataset" do
 			it "raises ArgumentError" do
-				expect { Hypothesis.new(dataset: attributes_for(:invalid_points_hypothesis)) }.
+				expect { Hypothesis.new(attributes_for(:invalid_points_hypothesis)) }.
 				to raise_error ArgumentError
 			end
 		end

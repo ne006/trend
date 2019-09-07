@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "@rails/webpacker": "^3.2.2",
-		"highcharts": "^6.0.4"
+    "highcharts": "^6.0.4"
   }
 }

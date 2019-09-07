@@ -4,4 +4,6 @@ require_relative 'application'
 # Initialize the Rails application.
 Rails.application.initialize!
 
-# config.force_ssl = true
+Rails.application.configure do
+	config.force_ssl = true
+end

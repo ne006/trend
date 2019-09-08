@@ -10,12 +10,13 @@ threads min_threads_count, max_threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-#port        ENV.fetch("PORT") { 3000 }
-
-ssl_bind '0.0.0.0', ENV.fetch("SSL_PORT") { 9292 },
-	key: ENV.fetch("APP_SSL_KEY"),
-	cert: ENV.fetch("APP_SSL_CERT")
-
+if ENV["USE_SSL"].present?
+	ssl_bind '0.0.0.0', ENV.fetch("SSL_PORT") { 9292 },
+		key: ENV.fetch("APP_SSL_KEY") { "certs/server.key" },
+		cert: ENV.fetch("APP_SSL_CERT") { "certs/server.crt" }
+else
+	port ENV.fetch("PORT") { 3000 }
+end
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }

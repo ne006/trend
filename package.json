@@ -1,23 +1,15 @@
 {
-  "name": "trend",
-  "private": "true",
-  "version": "0.0.1",
-  "description": "Visualize a set of 2d points and linear regression based on it",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
-  },
-  "author": "ne006",
-  "license": "ISC",
-  "devDependencies": {
-    "css-loader": "^0.28.9",
-    "style-loader": "^0.20.1",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^3.0.0"
-  },
-  "dependencies": {
-    "@rails/webpacker": "^3.2.2",
-    "highcharts": "^6.0.4"
-  }
+		"name": "trend",
+		"private": "true",
+		"version": "0.0.1",
+		"description": "Visualize a set of 2d points and linear regression based on it",
+		"author": "ne006",
+		"license": "ISC",
+		"dependencies": {
+				"@rails/webpacker": "^4.0.7",
+				"highcharts": "^6.0.4"
+		},
+		"devDependencies": {
+				"webpack-dev-server": "^3.8.0"
+		}
 }

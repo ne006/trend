@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'webpacker', '~> 3.2'
+gem 'webpacker', '~> 4.x'
 gem 'haml-rails'
 
 # Use Capistrano for deployment

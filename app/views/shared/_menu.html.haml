@@ -1,0 +1,6 @@
+= javascript_pack_tag 'menu'
+#menu
+	%app-menu
+		%template
+			- %w(hypotheses).each do |r|
+				%app-menu-item{name: r.capitalize, active: (controller_name == r).to_s, link: send("#{r}_path".to_sym)}

@@ -1,0 +1,36 @@
+hmtl {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	height: 100%;
+}
+
+html, body {
+	margin: 0px;
+
+	#application {
+		display: flex;
+		flex: 1;
+		position: absolute;
+		top:0;
+		bottom:0;
+		width: 100%;
+
+		#menu {
+			position: relative;
+			padding: 20px;
+			background-color: #afa;
+			box-shadow: inset -5px 0 5px 0 #8d8
+		}
+
+		#content {
+			position: relative;
+			top: 0;
+			bottom: 0;
+			flex: 1;
+			padding: 20px;
+		}
+	}
+}

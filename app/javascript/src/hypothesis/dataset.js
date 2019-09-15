@@ -59,7 +59,7 @@ class Dataset{
 
 		//Submit dataset
 		fetch(
-			document.location.pathname+(document.location.pathname.endsWith("/") ? "" : "/")+"hypotheses",
+			process.env.RAILS_RELATIVE_URL_ROOT+(process.env.RAILS_RELATIVE_URL_ROOT.endsWith("/") ? "" : "/")+"hypotheses",
 			{
 				method: "POST",
 				body: JSON.stringify({points: this.data}),

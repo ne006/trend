@@ -11,8 +11,6 @@ class Trend {
 
 		this.graph.on("newPoint", (p)=>this.dataset.addPoint(p));
 	}
-
-
 }
 
 export default Trend;
